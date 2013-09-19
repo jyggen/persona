@@ -32,10 +32,14 @@ class PersonaUserProvider implements UserProviderInterface
             $user = App::make('events')->fire('persona.login', array($identity));
 
             if (isset($user[0]) === false) {
-                throw new Exception('You must register an observer of the event "persona.login" to use Mozilla Persona authentication.');
+                throw new Exception(
+                    'You must register an observer of the event "persona.login" to use Mozilla Persona authentication.'
+                );
             } elseif (($user[0] instanceof UserInterface) === false) {
                 $type = (is_object($user[0])) ? get_class($user[0]) : gettype($user[0]);
-                throw new Exception('"persona.login" expected an instance of Illuminate\\Auth\\UserInterface, '.$type.' received.');
+                throw new Exception(
+                    '"persona.login" expected an instance of Illuminate\\Auth\\UserInterface, '.$type.' received.'
+                );
             }
 
             $this->identity = $identity;

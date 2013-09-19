@@ -25,9 +25,12 @@ class PersonaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->package('mozilla/persona');
-        Auth::extend('persona', function() {
-            return new Guard(new PersonaUserProvider, $this->app->make('session'));
-        });
+        Auth::extend(
+            'persona',
+            function () {
+                return new Guard(new PersonaUserProvider, $this->app->make('session'));
+            }
+        );
     }
 
     /**
@@ -37,15 +40,24 @@ class PersonaServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('persona.verifier', function($app) {
-            return new Verifier(sprintf('%s://%s:%u', Request::getScheme(), Request::getHost(), Request::getPort()));
-        });
-        $this->app->bind('persona.identity', function($app, $assertion) {
-            return new Identity($assertion);
-        });
-        $this->app->bind('persona.user', function($app, $attributes) {
-            return new PersonaUser($attributes);
-        });
+        $this->app->singleton(
+            'persona.verifier',
+            function ($app) {
+                return new Verifier(sprintf('%s://%s:%u', Request::getScheme(), Request::getHost(), Request::getPort()));
+            }
+        );
+        $this->app->bind(
+            'persona.identity',
+            function ($app, $assertion) {
+                return new Identity($assertion);
+            }
+        );
+        $this->app->bind(
+            'persona.user',
+            function ($app, $attributes) {
+                return new PersonaUser($attributes);
+            }
+        );
     }
 
     /**
