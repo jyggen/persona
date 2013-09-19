@@ -42,15 +42,21 @@ class Verifier
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 0);
 
-        $response = json_decode(curl_exec($curl));
+        $response = curl_exec($curl);
+
+        if ($response === false) {
+            throw new Exception(curl_error($curl));
+        }
 
         curl_close($curl);
+
+        $json = json_decode($response);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new Exception('Persona returned unexpected data.');
         }
 
-        $identity->parse($response);
+        $identity->parse($json);
 
     }
 }
