@@ -43,7 +43,8 @@ class PersonaServiceProvider extends ServiceProvider
         $this->app->singleton(
             'persona.verifier',
             function ($app) {
-                return new Verifier(sprintf('%s://%s:%u', Request::getScheme(), Request::getHost(), Request::getPort()));
+                $audience = sprintf('%s://%s:%u', Request::getScheme(), Request::getHost(), Request::getPort());
+                return new Verifier($audience);
             }
         );
         $this->app->bind(
