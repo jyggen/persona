@@ -74,7 +74,7 @@ class ProviderLaravelPersonaServiceProviderTest extends TestCase
 
     protected function getPackageProviders()
     {
-        return array('Mozilla\Persona\Provider\laravel\PersonaServiceProvider');
+        return array('Mozilla\Persona\Provider\Laravel\PersonaServiceProvider');
     }
 
     protected function getEnvironmentSetUp($app)
