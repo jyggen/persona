@@ -110,4 +110,30 @@ class PersonaUserProvider implements UserProviderInterface
         return $user;
 
     }
+
+    protected function createUser($email)
+    {
+
+        $event = App::make('events');
+
+        if ($event->hasListeners(self::EVENT_REGISTER)) {
+
+            $user = $event->fire(self::EVENT_REGISTER, array($email));
+            $user = $user[0];
+
+            if (($user instanceof UserInterface) === false and $user !== null) {
+                $type = (is_object($user[0])) ? get_class($user[0]) : gettype($user[0]);
+                throw new Exception(
+                    self::EVENT_LOGIN.' expected an instance of Illuminate\\Auth\\UserInterface, '.$type.' received.'
+                );
+            }
+
+        } else {
+            DB::table(Config::get('auth.table'))->insert(array('email' => $email));
+            $user = $this->retrieveById($email);
+        }
+
+        return $user;
+
+    }
 }
