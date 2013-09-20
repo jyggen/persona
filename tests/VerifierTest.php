@@ -66,4 +66,19 @@ class VerifierTest extends TestCase
         $verifier = new Verifier('http://example.com', 'http://example.com');
         $this->assertSame('http://example.com', $verifier->getEndpoint());
     }
+
+    /**
+     * @expectedException Exception
+     * @expectedExceptionMessage unknown.endpoint
+     */
+    public function testVerifyWithCurlError()
+    {
+
+        $identity = Mockery::mock('Mozilla\\Persona\\Identity');
+        $identity->shouldReceive('getAssertion')->times(1)->andReturn('assertion');
+
+        $verifier = new Verifier('http://example.com', 'http://unknown.endpoint');
+        $verifier->verify($identity);
+
+    }
 }
