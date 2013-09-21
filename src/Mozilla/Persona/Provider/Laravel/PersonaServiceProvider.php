@@ -27,8 +27,8 @@ class PersonaServiceProvider extends ServiceProvider
         $this->package('mozilla/persona');
         Auth::extend(
             'persona',
-            function () {
-                return new Guard(new PersonaUserProvider, $this->app->make('session'));
+            function ($app) {
+                return new Guard(new PersonaUserProvider, $app->make('session'));
             }
         );
     }
