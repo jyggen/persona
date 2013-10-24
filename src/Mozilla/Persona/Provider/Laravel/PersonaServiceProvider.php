@@ -28,7 +28,7 @@ class PersonaServiceProvider extends ServiceProvider
         Auth::extend(
             'persona',
             function ($app) {
-                return new Guard(new PersonaUserProvider, $app->make('session'));
+                return new Guard(new PersonaUserProvider, $app->make('session')->driver());
             }
         );
     }
