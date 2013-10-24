@@ -1,5 +1,5 @@
 <?php
-namespace Mozilla\Persona\Provider\Laravel;
+namespace Jyggen\Persona\Provider\Laravel;
 
 use Illuminate\Auth\GenericUser;
 

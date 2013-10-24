@@ -1,8 +1,8 @@
 <?php
-namespace Mozilla\Persona\Test;
+namespace Jyggen\Persona\Test;
 
 use Mockery;
-use Mozilla\Persona\Verifier as Verifier;
+use Jyggen\Persona\Verifier as Verifier;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class VerifierTest extends TestCase
@@ -15,7 +15,7 @@ class VerifierTest extends TestCase
     public function testConstructor()
     {
         $verifier = new Verifier('http://example.com');
-        $this->assertInstanceof('Mozilla\\Persona\\Verifier', $verifier);
+        $this->assertInstanceof('Jyggen\\Persona\\Verifier', $verifier);
     }
 
     /**
@@ -29,7 +29,7 @@ class VerifierTest extends TestCase
     public function testVerify()
     {
 
-        $identity = Mockery::mock('Mozilla\\Persona\\Identity');
+        $identity = Mockery::mock('Jyggen\\Persona\\Identity');
         $identity->shouldReceive('getAssertion')->times(1)->andReturn('assertion');
         $identity->shouldReceive('parse')->with('stdClass')->times(1);
 
@@ -45,7 +45,7 @@ class VerifierTest extends TestCase
     public function testVerifyWithInvalidResponse()
     {
 
-        $identity = Mockery::mock('Mozilla\\Persona\\Identity');
+        $identity = Mockery::mock('Jyggen\\Persona\\Identity');
         $identity->shouldReceive('getAssertion')->times(1)->andReturn('assertion');
 
         $verifier = new Verifier('http://example.com', 'http://example.com');
@@ -74,7 +74,7 @@ class VerifierTest extends TestCase
     public function testVerifyWithCurlError()
     {
 
-        $identity = Mockery::mock('Mozilla\\Persona\\Identity');
+        $identity = Mockery::mock('Jyggen\\Persona\\Identity');
         $identity->shouldReceive('getAssertion')->times(1)->andReturn('assertion');
 
         $verifier = new Verifier('http://example.com', 'http://unknown.endpoint');

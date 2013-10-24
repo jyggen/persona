@@ -1,5 +1,5 @@
 <?php
-namespace Mozilla\Persona;
+namespace Jyggen\Persona;
 
 use Exception;
 

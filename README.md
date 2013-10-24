@@ -1,10 +1,10 @@
 ## Mozilla Persona
 
-[![Latest Stable Version](https://poser.pugx.org/mozilla/persona/version.png)](https://packagist.org/packages/mozilla/persona) [![Total Downloads](https://poser.pugx.org/mozilla/persona/d/total.png)](https://packagist.org/packages/mozilla/persona) [![Build Status](https://travis-ci.org/jyggen/persona.png)](https://travis-ci.org/jyggen/persona)
+[![Latest Stable Version](https://poser.pugx.org/jyggen/persona/version.png)](https://packagist.org/packages/jyggen/persona) [![Total Downloads](https://poser.pugx.org/jyggen/persona/d/total.png)](https://packagist.org/packages/jyggen/persona) [![Build Status](https://travis-ci.org/jyggen/persona.png)](https://travis-ci.org/jyggen/persona)
 
 A framework agnostic implementation of Mozilla Persona, the cross-browser login system for the Web that's easy to use and easy to deploy.
 
-[Find Mozilla Persona on Packagist/Composer](https://packagist.org/packages/mozilla/persona).
+[Find Mozilla Persona on Packagist/Composer](https://packagist.org/packages/jyggen/persona).
 
 ### Documentation
 

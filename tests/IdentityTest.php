@@ -1,8 +1,8 @@
 <?php
-namespace Mozilla\Persona\Test;
+namespace Jyggen\Persona\Test;
 
 use Mockery;
-use Mozilla\Persona\Identity as Identity;
+use Jyggen\Persona\Identity as Identity;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
 
@@ -16,7 +16,7 @@ class IdentityTest extends TestCase
     public function testConstructor()
     {
         $identity = new Identity('assertion');
-        $this->assertInstanceof('Mozilla\\Persona\\Identity', $identity);
+        $this->assertInstanceof('Jyggen\\Persona\\Identity', $identity);
     }
 
     /**

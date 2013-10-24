@@ -1,7 +1,7 @@
 <?php
-namespace Mozilla\Persona\Test;
+namespace Jyggen\Persona\Test;
 
-use Mozilla\Persona\Provider\Laravel\PersonaUser;
+use Jyggen\Persona\Provider\Laravel\PersonaUser;
 use Orchestra\Testbench\TestCase;
 
 class ProviderLaravelPersonaUserTest extends TestCase
@@ -9,7 +9,7 @@ class ProviderLaravelPersonaUserTest extends TestCase
     public function testConstruct()
     {
         $user = new PersonaUser(array('email' => 'test@example.com'));
-        $this->assertInstanceof('Mozilla\\Persona\\Provider\\Laravel\\PersonaUser', $user);
+        $this->assertInstanceof('Jyggen\\Persona\\Provider\\Laravel\\PersonaUser', $user);
         $this->assertInstanceof('Illuminate\\Auth\\UserInterface', $user);
     }
 

@@ -1,5 +1,5 @@
 <?php
-namespace Mozilla\Persona\Provider\Laravel;
+namespace Jyggen\Persona\Provider\Laravel;
 
 use App;
 use Config;

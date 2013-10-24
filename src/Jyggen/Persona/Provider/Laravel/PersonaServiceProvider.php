@@ -1,11 +1,11 @@
 <?php
-namespace Mozilla\Persona\Provider\Laravel;
+namespace Jyggen\Persona\Provider\Laravel;
 
 use Auth;
 use Illuminate\Auth\Guard;
 use Illuminate\Support\ServiceProvider;
-use Mozilla\Persona\Identity;
-use Mozilla\Persona\Verifier;
+use Jyggen\Persona\Identity;
+use Jyggen\Persona\Verifier;
 use Request;
 
 class PersonaServiceProvider extends ServiceProvider
@@ -24,7 +24,7 @@ class PersonaServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('mozilla/persona');
+        $this->package('jyggen/persona');
         Auth::extend(
             'persona',
             function ($app) {
