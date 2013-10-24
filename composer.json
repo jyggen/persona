@@ -2,7 +2,7 @@
     "name": "mozilla/persona",
     "type": "library",
     "description": "A framework agnostic implementation of Mozilla Persona, the cross-browser login system for the Web that's easy to use and easy to deploy.",
-    "keywors": ["Mozilla", "Persona", "Mozilla Persona", "BrowserID", "Auth", "Authentication", "Login", "Laravel"],
+    "keywords": ["Mozilla", "Persona", "Mozilla Persona", "BrowserID", "Auth", "Authentication", "Login", "Laravel"],
     "license": "MIT",
     "authors": [
         {
