@@ -16,6 +16,10 @@ This library comes packaged with a service provider and an authentication driver
 
 Pull requests with additional providers and integrations are more than welcome!
 
+### Changelog
+
+See [GitHub releases](https://github.com/jyggen/persona/releases).
+
 ### About
 
 #### Requirements
