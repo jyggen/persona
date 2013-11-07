@@ -25,12 +25,9 @@ class PersonaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->package('jyggen/persona');
-        Auth::extend(
-            'persona',
-            function ($app) {
-                return new Guard(new PersonaUserProvider, $app->make('session')->driver());
-            }
-        );
+        Auth::extend('persona', function ($app) {
+            return new Guard(new PersonaUserProvider, $app->make('session')->driver());
+        });
     }
 
     /**
@@ -40,25 +37,21 @@ class PersonaServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(
-            'persona.verifier',
-            function ($app, $endpoint) {
-                $audience = sprintf('%s://%s:%u', Request::getScheme(), Request::getHost(), Request::getPort());
-                return (empty($endpoint)) ? new Verifier($audience) : new Verifier($audience, $endpoint);
-            }
-        );
-        $this->app->bind(
-            'persona.identity',
-            function ($app, $assertion) {
-                return new Identity($assertion);
-            }
-        );
-        $this->app->bind(
-            'persona.user',
-            function ($app, $attributes) {
-                return new PersonaUser($attributes);
-            }
-        );
+        $this->app->bind('persona.identity', function ($app, $assertion) {
+            $app->log->debug('Identity using assertion "'.$assertion.'" created.');
+            return new Identity($assertion);
+        });
+
+        $this->app->singleton('persona.verifier', function ($app, $endpoint) {
+            $audience = sprintf('%s://%s:%u', Request::getScheme(), Request::getHost(), Request::getPort());
+            $app->log->debug('Verifier using audience "'.$audience.'" created.');
+            return (empty($endpoint)) ? new Verifier($audience) : new Verifier($audience, $endpoint);
+        });
+
+        $this->app->bind('persona.user', function ($app, $attributes) {
+            $app->log->debug('New PersonaUser created.');
+            return new PersonaUser($attributes);
+        });
     }
 
     /**
@@ -68,6 +61,6 @@ class PersonaServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('persona.verifier', 'persona.identity', 'persona.user');
+        return array('persona.identity', 'persona.verifier', 'persona.user');
     }
 }
