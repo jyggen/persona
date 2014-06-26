@@ -8,7 +8,7 @@ A framework agnostic implementation of Mozilla Persona, the cross-browser login 
 
 ### Documentation
 
-Documentation for this library is available at [docs.jyggen.com](http://docs.jyggen.com/persona).
+Documentation for this library is available at [docs.jyggen.com](http://docs.jyggen.com/persona) (currently down, see [the docs repo](https://github.com/jyggen/docs/tree/master/persona) instead).
 
 #### Framework Integration
 
