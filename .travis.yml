@@ -9,13 +9,9 @@ php:
 
 sudo: false
 
-env:
-  - COMPOSER_OPTS=""
-  - COMPOSER_OPTS="--prefer-lowest"
-
 before_script:
   - travis_retry composer self-update
-  - travis_retry composer update --no-interaction --prefer-dist $COMPOSER_OPTS
+  - travis_retry composer update --no-interaction --prefer-dist
 
 script:
   - mkdir -p build/logs
