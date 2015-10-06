@@ -1,32 +1,38 @@
 {
     "name": "jyggen/persona",
-    "type": "library",
     "description": "A framework agnostic implementation of Mozilla Persona, the cross-browser login system for the Web that's easy to use and easy to deploy.",
+    "type": "library",
     "keywords": ["Mozilla", "Persona", "Mozilla Persona", "BrowserID", "Auth", "Authentication", "Login", "Laravel"],
+    "homepage": "https://github.com/jyggen/persona",
     "license": "MIT",
     "authors": [
         {
             "name": "Jonas Stendahl",
-            "email": "jonas.stendahl@gmail.com"
+            "email": "jonas.stendahl@gmail.com",
+            "homepage": "https://jyggen.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/jyggen/persona/issues",
+        "source": "https://github.com/jyggen/persona"
+    },
     "require": {
-        "php": ">=5.3.0",
-        "ext-curl": "*"
+        "php": ">=5.5",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~3.7",
-        "mockery/mockery": "dev-master",
-        "orchestra/testbench": "~2.0"
+        "apigen/apigen": "~4.0",
+        "jakub-onderka/php-parallel-lint": "^0.9",
+        "phpunit/phpunit": "~4.0",
+        "satooshi/php-coveralls": "^0.6",
+        "squizlabs/php_codesniffer": "~2.0"
     },
     "autoload": {
-        "psr-0": {
-            "Jyggen\\Persona": "src/"
-        }
+        "psr-4": {"Boo\\Persona\\": "src/"}
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "2.0.x-dev"
         }
     }
 }

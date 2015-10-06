@@ -1,56 +1,101 @@
 <?php
-namespace Jyggen\Persona\Test;
+namespace Boo\Persona;
 
-use Mockery;
-use Jyggen\Persona\Verifier as Verifier;
-use PHPUnit_Framework_TestCase as TestCase;
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\Psr7\Response;
+use PHPUnit_Framework_TestCase;
 
-class VerifierTest extends TestCase
+class VerifierTest extends PHPUnit_Framework_TestCase
 {
-    public function tearDown()
-    {
-        Mockery::close();
-    }
+    protected $responses = [
+        'valid'              => '{"email": "foobar@example.com", "status": "okay", "audience": "http://example.com", "expires": 1308859352261, "issuer": "example.com"}',
+        'invalid_json'       => 'foobar',
+        'incorrect_audience' => '{"email": "foobar@example.com", "status": "okay", "audience": "incorrect"}',
+        'invalid'            => '{"status":"failure","reason":"no certificates provided"}',
+    ];
 
-    public function testConstructor()
+    public function testThatClassCanBeConstructed()
     {
         $verifier = new Verifier('http://example.com');
-        $this->assertInstanceof('Jyggen\\Persona\\Verifier', $verifier);
+        $this->assertInstanceof(Verifier::class, $verifier);
     }
 
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testConstructorWithoutAudience()
+    public function testThatClassCanNotBeCosntructedWithoutAudience()
     {
-        new Verifier();
+        new Verifier;
     }
 
-    public function testVerify()
+    public function testVerifyWithValidResponse()
     {
+        $container = [];
+        $client    = $this->getGuzzleClient($container, $this->responses['valid']);
+        $verifier  = new Verifier('http://example.com', $client);
 
-        $identity = Mockery::mock('Jyggen\\Persona\\Identity');
-        $identity->shouldReceive('getAssertion')->times(1)->andReturn('assertion');
-        $identity->shouldReceive('parse')->with('stdClass')->times(1);
+        $verifier->verify('foobar');
 
-        $verifier = new Verifier('http://example.com');
-        $verifier->verify($identity);
+        $request  = $container[0]['request'];
+        $body     = json_decode($request->getBody());
+        $response = $container[0]['response'];
 
+        $this->assertSame('POST', $request->getMethod());
+        $this->assertSame(Verifier::ENDPOINT, (string) $request->getUri());
+        $this->assertSame('foobar', $body->assertion);
+        $this->assertSame('http://example.com', $body->audience);
+        $this->assertSame($this->responses['valid'], (string) $response->getBody());
     }
 
     /**
-     * @expectedException Exception
-     * @expectedExceptionMessage Persona returned unexpected data.
+     * @expectedException Boo\Persona\Exceptions\JsonException
      */
-    public function testVerifyWithInvalidResponse()
+    public function testVerifyWithInvalidJsonResponse()
     {
+        $container = [];
+        $client    = $this->getGuzzleClient($container, $this->responses['invalid_json']);
+        $verifier  = new Verifier('http://example.com', $client);
 
-        $identity = Mockery::mock('Jyggen\\Persona\\Identity');
-        $identity->shouldReceive('getAssertion')->times(1)->andReturn('assertion');
+        $verifier->verify('foobar');
+    }
 
-        $verifier = new Verifier('http://example.com', 'http://example.com');
-        $verifier->verify($identity);
+    /**
+     * @expectedException Boo\Persona\Exceptions\PersonaException
+     */
+    public function testVerifyWithIncorrectAudienceResponse()
+    {
+        $container = [];
+        $client    = $this->getGuzzleClient($container, $this->responses['incorrect_audience']);
+        $verifier  = new Verifier('http://example.com', $client);
 
+        $verifier->verify('foobar');
+    }
+
+    /**
+     * @expectedException GuzzleHttp\Exception\ServerException
+     */
+    public function testVerifyWithServerErrorResponse()
+    {
+        $container = [];
+        $client    = $this->getGuzzleClient($container, '', 500);
+        $verifier  = new Verifier('http://example.com', $client);
+
+        $verifier->verify('foobar');
+    }
+
+    /**
+     * @expectedException Boo\Persona\Exceptions\PersonaException
+     */
+    public function testVerifyWithInvalideResponse()
+    {
+        $container = [];
+        $client    = $this->getGuzzleClient($container, $this->responses['invalid']);
+        $verifier  = new Verifier('http://example.com', $client);
+
+        $verifier->verify('foobar');
     }
 
     public function testGetAudience()
@@ -63,22 +108,16 @@ class VerifierTest extends TestCase
     {
         $verifier = new Verifier('http://example.com');
         $this->assertSame(Verifier::ENDPOINT, $verifier->getEndpoint());
-        $verifier = new Verifier('http://example.com', 'http://example.com');
-        $this->assertSame('http://example.com', $verifier->getEndpoint());
     }
 
-    /**
-     * @expectedException Exception
-     * @expectedExceptionMessage unknown.endpoint
-     */
-    public function testVerifyWithCurlError()
+    protected function getGuzzleClient(&$container, $body, $code = 200)
     {
+        $history  = Middleware::history($container);
+        $response = new Response($code, [], $body);
+        $handler  = HandlerStack::create(new MockHandler([$response]));
 
-        $identity = Mockery::mock('Jyggen\\Persona\\Identity');
-        $identity->shouldReceive('getAssertion')->times(1)->andReturn('assertion');
+        $handler->push($history);
 
-        $verifier = new Verifier('http://example.com', 'http://unknown.endpoint');
-        $verifier->verify($identity);
-
+        return new Client(['handler' => $handler]);
     }
 }

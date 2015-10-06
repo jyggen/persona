@@ -1,6 +1,31 @@
-## Mozilla Persona
+## jyggen/persona
 
-[![Latest Stable Version](https://poser.pugx.org/jyggen/persona/version.png)](https://packagist.org/packages/jyggen/persona) [![Total Downloads](https://poser.pugx.org/jyggen/persona/d/total.png)](https://packagist.org/packages/jyggen/persona) [![Build Status](https://travis-ci.org/jyggen/persona.png)](https://travis-ci.org/jyggen/persona)
+[![Source Code][badge-source]][source]
+[![Latest Version][badge-release]][release]
+[![Software License][badge-license]][license]
+[![Build Status][badge-build]][build]
+[![HHVM Status][badge-hhvm]][hhvm]
+[![Scrutinizer][badge-quality]][quality]
+[![Coverage Status][badge-coverage]][coverage]
+[![Total Downloads][badge-downloads]][downloads]
+
+[badge-source]: https://img.shields.io/badge/source-jyggen/persona-blue.svg?style=flat-square
+[badge-release]: https://img.shields.io/github/release/jyggen/persona.svg?style=flat-square
+[badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[badge-build]: https://img.shields.io/travis/jyggen/persona/master.svg?style=flat-square
+[badge-hhvm]: https://img.shields.io/hhvm/jyggen/persona.svg?style=flat-square
+[badge-quality]: https://img.shields.io/scrutinizer/g/jyggen/persona/master.svg?style=flat-square
+[badge-coverage]: https://img.shields.io/coveralls/jyggen/persona/master.svg?style=flat-square
+[badge-downloads]: https://img.shields.io/packagist/dt/jyggen/persona.svg?style=flat-square
+
+[source]: https://github.com/jyggen/persona
+[release]: https://github.com/jyggen/persona/releases
+[license]: https://github.com/jyggen/persona/blob/master/LICENSE
+[build]: https://travis-ci.org/jyggen/persona
+[hhvm]: http://hhvm.h4cc.de/package/jyggen/persona
+[quality]: https://scrutinizer-ci.com/g/jyggen/persona/
+[coverage]: https://coveralls.io/r/jyggen/persona?branch=master
+[downloads]: https://packagist.org/packages/jyggen/persona
 
 A framework agnostic implementation of Mozilla Persona, the cross-browser login system for the Web that's easy to use and easy to deploy.
 
