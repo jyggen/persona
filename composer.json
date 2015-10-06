@@ -1,5 +1,5 @@
 {
-    "name": "jyggen/persona",
+    "name": "boo/persona",
     "description": "A framework agnostic implementation of Mozilla Persona, the cross-browser login system for the Web that's easy to use and easy to deploy.",
     "type": "library",
     "keywords": ["Mozilla", "Persona", "Mozilla Persona", "BrowserID", "Auth", "Authentication", "Login", "Laravel"],

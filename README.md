@@ -1,4 +1,4 @@
-## jyggen/persona
+## boo/persona
 
 [![Source Code][badge-source]][source]
 [![Latest Version][badge-release]][release]
@@ -13,19 +13,19 @@
 [badge-release]: https://img.shields.io/github/release/jyggen/persona.svg?style=flat-square
 [badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [badge-build]: https://img.shields.io/travis/jyggen/persona/master.svg?style=flat-square
-[badge-hhvm]: https://img.shields.io/hhvm/jyggen/persona.svg?style=flat-square
+[badge-hhvm]: https://img.shields.io/hhvm/boo/persona.svg?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/jyggen/persona/master.svg?style=flat-square
 [badge-coverage]: https://img.shields.io/coveralls/jyggen/persona/master.svg?style=flat-square
-[badge-downloads]: https://img.shields.io/packagist/dt/jyggen/persona.svg?style=flat-square
+[badge-downloads]: https://img.shields.io/packagist/dt/boo/persona.svg?style=flat-square
 
 [source]: https://github.com/jyggen/persona
 [release]: https://github.com/jyggen/persona/releases
 [license]: https://github.com/jyggen/persona/blob/master/LICENSE
 [build]: https://travis-ci.org/jyggen/persona
-[hhvm]: http://hhvm.h4cc.de/package/jyggen/persona
+[hhvm]: http://hhvm.h4cc.de/package/boo/persona
 [quality]: https://scrutinizer-ci.com/g/jyggen/persona/
 [coverage]: https://coveralls.io/r/jyggen/persona?branch=master
-[downloads]: https://packagist.org/packages/jyggen/persona
+[downloads]: https://packagist.org/packages/boo/persona
 
 A framework agnostic implementation of Mozilla Persona, the cross-browser login system for the Web that's easy to use and easy to deploy.
 
